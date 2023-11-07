@@ -3,6 +3,7 @@
     "name": "react-native-minyan-maker",
     "slug": "react-native-minyan-maker",
     "version": "1.0.0",
+    "scheme": "your-app-scheme",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
