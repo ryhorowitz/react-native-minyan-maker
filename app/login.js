@@ -7,11 +7,11 @@ export default function Login() {
 
   const handleLogin = () => {
     // Basic authentication logic (replace with your actual authentication process)
-    if (email === 'user@example.com' && password === 'password') {
-      alert('Login successful');
-    } else {
-      alert('Login failed');
-    }
+    // if (email === 'user@example.com' && password === 'password') {
+    //   alert('Login successful');
+    // } else {
+    //   alert('Login failed');
+    // }
     const body = { email, password }
     const options = {
       method: "POST",
@@ -20,7 +20,7 @@ export default function Login() {
       },
       body: JSON.stringify(body)
     }
-    fetch(`/login`, options)
+    fetch(`localhost:3000/login`, options)
       .then(() => {
         console.log('hit then block of login fetch')
       })
