@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
+// SplashScreen.show();
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ export default function Login() {
       },
       body: JSON.stringify(body)
     }
-    fetch(`localhost:3000/login`, options)
+    fetch(`http://localhost:3000/login`, options)
       .then(() => {
         console.log('hit then block of login fetch')
       })

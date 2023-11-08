@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 
 export default function App() {
-  SplashScreen.show();
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!!</Text>

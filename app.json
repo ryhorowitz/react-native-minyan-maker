@@ -8,7 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "/Users/rywitz/Development/code/projects/react-native-minyan-maker/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
