@@ -12,7 +12,19 @@ export default function Login() {
     } else {
       alert('Login failed');
     }
-    fetch(`localhost`)
+    const body = { email, password }
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    }
+    fetch(`/login`, options)
+      .then(() => {
+        console.log('hit then block of login fetch')
+      })
+      .catch(e => console.error('ERROR is ', e))
   };
 
   return (
