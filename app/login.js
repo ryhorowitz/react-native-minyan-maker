@@ -12,6 +12,7 @@ export default function Login() {
     } else {
       alert('Login failed');
     }
+    fetch(`localhost`)
   };
 
   return (
