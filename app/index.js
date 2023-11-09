@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator()
 export default function App() {
 
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
         {/* <Stack. */}
