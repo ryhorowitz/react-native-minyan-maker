@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
 // SplashScreen.show();
@@ -7,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigation = useNavigation()
   const handleLogin = () => {
     // Basic authentication logic (replace with your actual authentication process)
     // if (email === 'user@example.com' && password === 'password') {
@@ -25,26 +27,33 @@ export default function Login() {
     fetch(`http://localhost:3000/login`, options)
       .then(() => {
         console.log('hit then block of login fetch')
+        navigation.replace("Home")
       })
       .catch(e => console.error('ERROR is ', e))
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login Page</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Button title="Login" onPress={handleLogin} />
-    </View>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding">
+      <View >
+        <Text style={styles.title}>Login Page</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Login" onPress={handleLogin} />
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -57,6 +66,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 20,
+    textAlign: 'center'
   },
   input: {
     width: 300,
