@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import { auth } from '../firebase';
 
 // SplashScreen.show();
 export default function Login() {
@@ -9,6 +10,16 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation()
+
+  const handleSignup = () => {
+    auth
+      .createUserWithEmailandPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user
+        console.log(user.email)
+      })
+      .catch(err => alert(err.message))
+  }
   const handleLogin = () => {
     const body = { email, password }
     const options = {
@@ -46,6 +57,9 @@ export default function Login() {
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Login" onPress={handleLogin} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Sign Up" onPress={handleSignup} />
       </View>
     </KeyboardAvoidingView>
   );
