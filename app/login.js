@@ -10,12 +10,6 @@ export default function Login() {
 
   const navigation = useNavigation()
   const handleLogin = () => {
-    // Basic authentication logic (replace with your actual authentication process)
-    // if (email === 'user@example.com' && password === 'password') {
-    //   alert('Login successful');
-    // } else {
-    //   alert('Login failed');
-    // }
     const body = { email, password }
     const options = {
       method: "POST",
