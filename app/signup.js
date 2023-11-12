@@ -81,13 +81,13 @@ export default function Signup() {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Pressable title="Login" onPress={navigateToLogin}>
-            <Text>Login</Text></Pressable>
-        </View>
-        <View style={styles.buttonContainer}>
           <Pressable title="Sign Up" onPress={handleSignup}>
             <Text>Signup</Text>
           </Pressable>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Pressable title="Login" onPress={navigateToLogin}>
+            <Text>Login Page</Text></Pressable>
         </View>
       </KeyboardAvoidingView>
     </>

@@ -70,7 +70,7 @@ export default function Login() {
         </View>
         <View style={styles.buttonContainer}>
           <Pressable title="Sign Up" onPress={navigateToSignup}>
-            <Text>Signup</Text>
+            <Text>Signup Page</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>

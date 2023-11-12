@@ -2,12 +2,26 @@ import React, { useContext, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import AppContext from './AppContext'
 import Login from './login';
 import Home from './home';
 import Signup from './signup'
 const Stack = createNativeStackNavigator()
+const Tab = createMaterialBottomTabNavigator()
 
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName='Home'
+      activeColor="#e91e63"
+      barStyle={{ backgroundColor: 'tomato' }}
+    >
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Shuls" component={Shuls} />
+    </Tab.Navigator>
+  )
+}
 function App() {
   const { user, setUser } = useContext(AppContext)
   // console.log('user', !user)
