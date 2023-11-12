@@ -9,7 +9,7 @@ import Signup from './signup'
 const Stack = createNativeStackNavigator()
 
 function App() {
-  const { user, setUser } = useContext(AppContext)
+  const { user } = useContext(AppContext)
   // console.log('user', !user)
   if (!user) {
     return (

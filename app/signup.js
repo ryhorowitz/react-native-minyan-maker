@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-// import { auth } from '../firebase';
+import AppContext from './AppContext';
 
 // SplashScreen.show();
 export default function Signup() {
-  // const { setUser } = useContext(AppContext)
+  const { setUser } = useContext(AppContext)
   const [signupErrors, setSignupErrors] = useState([])
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -34,7 +34,7 @@ export default function Signup() {
         if (r.ok) {
           r.json().then(newUser => {
             console.log('new user is', newUser)
-            navigation.replace("Home")
+            setUser(newUser)
           })
         }
         else {

@@ -1,13 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import AppContext from './AppContext';
 // import { auth } from '../firebase';
 
 // SplashScreen.show();
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const { setUser } = useContext(AppContext)
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginErrors, setLoginErrors] = useState([])
 
   const navigation = useNavigation()
 
@@ -16,7 +19,7 @@ export default function Login() {
   }
 
   const handleLogin = () => {
-    const postBody = { email, password }
+    const postBody = { username, password }
     const postOptions = {
       method: "POST",
       headers: {
@@ -25,9 +28,17 @@ export default function Login() {
       body: JSON.stringify(postBody)
     }
     fetch(`http://localhost:3000/login`, postOptions)
-      .then(() => {
-        console.log('hit then block of login fetch')
-        navigation.replace("Home")
+      .then(r => {
+        if (r.ok) {
+          r.json().then(user => {
+            setUser(user)
+          })
+        } else {
+          r.json().then(e => {
+            console.log('error response', e.error)
+            setLoginErrors(Object.values(e).flat())
+          })
+        }
       })
       .catch(e => console.error('ERROR is ', e))
   };
@@ -41,8 +52,8 @@ export default function Login() {
           <Text style={styles.title}>Login Page</Text>
           <TextInput
             style={styles.input}
-            placeholder="Email"
-            onChangeText={(text) => setEmail(text)}
+            placeholder="Username"
+            onChangeText={(text) => setUsername(text)}
           />
           <TextInput
             style={styles.input}
