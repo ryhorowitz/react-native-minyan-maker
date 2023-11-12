@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      byebug
+      # byebug
       render json: user, status: :created
     else
       render json: { error: 'Invalid username or password' }, status: :unauthorized
@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    byebug
-    reset_session
+    # byebug
+    session[:user_id] = nil
     render status: :no_content
   end
 end

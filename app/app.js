@@ -9,8 +9,20 @@ import Signup from './signup'
 const Stack = createNativeStackNavigator()
 
 function App() {
-  const { user } = useContext(AppContext)
+  const { user, setUser } = useContext(AppContext)
   // console.log('user', !user)
+
+  useEffect(() => {
+    fetch('/auth')
+      .then(res => {
+        if (res.ok) {
+          res.json().then(user => setUser(user))
+        }
+      })
+      .catch(e => console.error('/auth fetch error is', e))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   if (!user) {
     return (
       <Stack.Navigator>

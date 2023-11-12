@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # after_action :notify_new_user, only: :create
 
   def show
+    byebug
     render json: current_user
   end
 

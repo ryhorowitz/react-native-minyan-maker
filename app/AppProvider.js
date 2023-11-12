@@ -15,18 +15,13 @@ const AppProvider = ({ children }) => {
     fetch('http://localhost:3000/signout', { method: 'DELETE' })
       .then(r => {
         if (r.ok) {
-          r.json()
-            .then(() => {
-              console.log('message', r.message)
-              setUser(null)
-            })
-            .then(() => setShuls([]))
+          console.log('in the sighnout r.ok block')
+          console.log('message', r.message)
+          setUser(null)
+          setShuls([])
         }
         else {
-          r.json().then(e => {
-            console.log('error response', e)
-            // setSignupErrors(Object.values(e))
-          })
+          console.error('ERROR is ', r)
         }
       })
       .catch(e => console.error('ERROR is ', e))

@@ -4,7 +4,7 @@ import { View, Text, TextInput, Pressable, StyleSheet, KeyboardAvoidi, Pressable
 import AppContext from './AppContext';
 
 export default function Home() {
-  const { signout } = useContext(AppContext)
+  const { user, signout } = useContext(AppContext)
   const navigation = useNavigation()
 
   const handleSignOut = () => {
@@ -12,7 +12,7 @@ export default function Home() {
   }
   return (
     <View style={styles.container}>
-      <Text> Profile: </Text>
+      <Text> Profile: {user.username}</Text>
       <Pressable style={styles.button}
         title="Sign Out" onPress={handleSignOut}>
         <Text>Signout</Text>

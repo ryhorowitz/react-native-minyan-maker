@@ -53,6 +53,7 @@ export default function Login() {
           <TextInput
             style={styles.input}
             placeholder="Username"
+            autoCapitalize='none'
             onChangeText={(text) => setUsername(text)}
           />
           <TextInput
