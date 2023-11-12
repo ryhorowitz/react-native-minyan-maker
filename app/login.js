@@ -27,6 +27,10 @@ export default function Login() {
         console.log('res is', res)
         navigation.replace("Home")
       })
+      // r.json().then(newUser => {
+      //   console.log('user created successfully', newUser)
+      //   setUser(newUser)
+      //   navigate('/home')
       .catch(e => console.error('ERROR is ', e))
   }
   const handleLogin = () => {
@@ -39,30 +43,32 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding">
-      <View >
-        <Text style={styles.title}>Login Page</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={handleLogin} />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Sign Up" onPress={handleSignup} />
-      </View>
-    </KeyboardAvoidingView>
+    <>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding">
+        <View >
+          <Text style={styles.title}>Login Page</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Login" onPress={handleLogin} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Sign Up" onPress={handleSignup} />
+        </View>
+      </KeyboardAvoidingView>
+    </>
   );
 }
 
