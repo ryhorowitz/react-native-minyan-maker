@@ -11,25 +11,25 @@ export default function Login() {
 
   const navigation = useNavigation()
 
+  const postBody = { email, password }
+  const postOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postBody)
+  }
+
   const handleSignup = () => {
-    auth
-      .createUserWithEmailandPassword(email, password)
-      .then(userCredentials => {
-        const user = userCredentials.user
-        console.log(user.email)
+    fetch(`http://localhost:3000/signup`, postOptions)
+      .then(() => {
+        console.log('hit then block of signup fetch')
+        navigation.replace("Home")
       })
-      .catch(err => alert(err.message))
+      .catch(e => console.error('ERROR is ', e))
   }
   const handleLogin = () => {
-    const body = { email, password }
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    }
-    fetch(`http://localhost:3000/login`, options)
+    fetch(`http://localhost:3000/login`, postOptions)
       .then(() => {
         console.log('hit then block of login fetch')
         navigation.replace("Home")
