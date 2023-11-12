@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import { auth } from '../firebase';
+// import { auth } from '../firebase';
 
 // SplashScreen.show();
 export default function Login() {
