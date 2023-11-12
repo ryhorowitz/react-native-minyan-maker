@@ -1,13 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 // import { auth } from '../firebase';
 
 // SplashScreen.show();
 export default function Signup() {
   // const { setUser } = useContext(AppContext)
-  // const [signupErrors, setSignupErrors] = useState([])
+  const [signupErrors, setSignupErrors] = useState([])
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,15 +30,20 @@ export default function Signup() {
       },
       body: JSON.stringify(signupBody)
     })
-      .then(r => r.json())
-      .then(res => {
-        console.log('res is', res)
-        navigation.replace("Home")
+      .then(r => {
+        if (r.ok) {
+          r.json().then(newUser => {
+            console.log('new user is', newUser)
+            navigation.replace("Home")
+          })
+        }
+        else {
+          r.json().then(e => {
+            console.log('error response', e)
+            setSignupErrors(Object.values(e))
+          })
+        }
       })
-      // r.json().then(newUser => {
-      //   console.log('user created successfully', newUser)
-      //   setUser(newUser)
-      //   navigate('/home')
       .catch(e => console.error('ERROR is ', e))
   }
   const navigateToLogin = () => {
@@ -76,10 +81,13 @@ export default function Signup() {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Login" onPress={navigateToLogin} />
+          <Pressable title="Login" onPress={navigateToLogin}>
+            <Text>Login</Text></Pressable>
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Sign Up" onPress={handleSignup} />
+          <Pressable title="Sign Up" onPress={handleSignup}>
+            <Text>Signup</Text>
+          </Pressable>
         </View>
       </KeyboardAvoidingView>
     </>

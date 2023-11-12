@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, Pressable, Button, StyleSheet, KeyboardAvoidi, PressablengView } from 'react-native';
 
 export default function Home() {
   const navigation = useNavigation()
@@ -11,10 +11,9 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Text> Profile: </Text>
-      <TouchableOpacity style={styles.button}>
-
-        <Button title="Sign Out" onPress={handleSignOut} />
-      </TouchableOpacity>
+      <Pressable style={styles.button}
+        title="Sign Out" onPress={handleSignOut}>
+      </Pressable>
     </View>
   )
 }

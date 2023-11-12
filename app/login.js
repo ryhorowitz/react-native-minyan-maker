@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 // import { auth } from '../firebase';
 
@@ -52,10 +52,14 @@ export default function Login() {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Login" onPress={handleLogin} />
+          <Pressable title="Login" onPress={handleLogin}>
+            <Text>Login</Text>
+          </Pressable>
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Sign Up" onPress={navigateToSignup} />
+          <Pressable title="Sign Up" onPress={navigateToSignup}>
+            <Text>Signup</Text>
+          </Pressable>
         </View>
       </KeyboardAvoidingView>
     </>
