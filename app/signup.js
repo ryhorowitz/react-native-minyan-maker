@@ -11,19 +11,18 @@ export default function Signup() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfrimPassword] = useState('')
+  const [password_confirmation, setPassword_confirmation] = useState('')
 
   const navigation = useNavigation()
 
-  // const signupOptions = 
-
   const handleSignup = () => {
     const signupBody = {
-      username: username.slice(),
-      email: email.slice(),
-      password: password.slice(),
-      confirmPassword: confirmPassword.slice()
+      username,
+      email,
+      password,
+      password_confirmation
     }
+
     fetch(`http://localhost:3000/signup`, {
       method: "POST",
       headers: {
@@ -42,7 +41,7 @@ export default function Signup() {
       //   navigate('/home')
       .catch(e => console.error('ERROR is ', e))
   }
-  const handleLogin = () => {
+  const navigateToLogin = () => {
     navigation.replace('Login')
   };
 
@@ -73,11 +72,11 @@ export default function Signup() {
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
-            onChangeText={(text) => setConfrimPassword(text)}
+            onChangeText={(text) => setPassword_confirmation(text)}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Login" onPress={handleLogin} />
+          <Button title="Login" onPress={navigateToLogin} />
         </View>
         <View style={styles.buttonContainer}>
           <Button title="Sign Up" onPress={handleSignup} />

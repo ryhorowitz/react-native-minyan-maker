@@ -11,29 +11,19 @@ export default function Login() {
 
   const navigation = useNavigation()
 
-  const postBody = { email, password }
-  const postOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(postBody)
+  function navigateToSignup() {
+    navigation.replace("Signup")
   }
 
-  const handleSignup = () => {
-    fetch(`http://localhost:3000/signup`, postOptions)
-      .then(r => r.json())
-      .then(res => {
-        console.log('res is', res)
-        navigation.replace("Signup")
-      })
-      // r.json().then(newUser => {
-      //   console.log('user created successfully', newUser)
-      //   setUser(newUser)
-      //   navigate('/home')
-      .catch(e => console.error('ERROR is ', e))
-  }
   const handleLogin = () => {
+    const postBody = { email, password }
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postBody)
+    }
     fetch(`http://localhost:3000/login`, postOptions)
       .then(() => {
         console.log('hit then block of login fetch')
@@ -65,7 +55,7 @@ export default function Login() {
           <Button title="Login" onPress={handleLogin} />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Sign Up" onPress={handleSignup} />
+          <Button title="Sign Up" onPress={navigateToSignup} />
         </View>
       </KeyboardAvoidingView>
     </>

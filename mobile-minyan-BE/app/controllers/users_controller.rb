@@ -8,12 +8,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    byebug
-    # @user = User.create!(user_params)
+    # byebug
+    @user = User.create!(user_params)
 
-    # session[:user_id] = @user.id
-    # render json: @user, status: :created
-    render json: {message: 'you hit the create user method'}
+    session[:user_id] = @user.id
+    render json: @user, status: :created
+    # render json: {message: 'you hit the create user method'}
   end
 
   def update
