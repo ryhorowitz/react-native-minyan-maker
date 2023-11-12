@@ -5,35 +5,32 @@ import SplashScreen from 'react-native-splash-screen';
 // import { auth } from '../firebase';
 
 // SplashScreen.show();
-export default function Login() {
+export default function Signup() {
   // const { setUser } = useContext(AppContext)
   // const [signupErrors, setSignupErrors] = useState([])
-  const [signupFormData, setSignupFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfrimPassword] = useState('')
 
   const navigation = useNavigation()
 
-  function handleSignupFormData(e) {
-    const { name, value } = e.target
-    setSignupFormData({ ...signupFormData, [name]: value })
-  }
-
-
-
-  const postOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(signupFormData)
-  }
+  // const signupOptions = 
 
   const handleSignup = () => {
-    fetch(`http://localhost:3000/signup`, postOptions)
+    const signupBody = {
+      username: username.slice(),
+      email: email.slice(),
+      password: password.slice(),
+      confirmPassword: confirmPassword.slice()
+    }
+    fetch(`http://localhost:3000/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(signupBody)
+    })
       .then(r => r.json())
       .then(res => {
         console.log('res is', res)
@@ -55,11 +52,16 @@ export default function Login() {
         style={styles.container}
         behavior="padding">
         <View >
-          <Text style={styles.title}>Signup Page</Text>
+          <Text style={styles.title}>Signup</Text>
           <TextInput
             style={styles.input}
             placeholder="Email"
             onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            onChangeText={(text) => setUsername(text)}
           />
           <TextInput
             style={styles.input}
@@ -71,7 +73,7 @@ export default function Login() {
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setConfrimPassword(text)}
           />
         </View>
         <View style={styles.buttonContainer}>
