@@ -6,18 +6,30 @@ import SplashScreen from 'react-native-splash-screen';
 
 // SplashScreen.show();
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const { setUser } = useContext(AppContext)
+  // const [signupErrors, setSignupErrors] = useState([])
+  const [signupFormData, setSignupFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
 
   const navigation = useNavigation()
 
-  const postBody = { email, password }
+  function handleSignupFormData(e) {
+    const { name, value } = e.target
+    setSignupFormData({ ...signupFormData, [name]: value })
+  }
+
+
+
   const postOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(postBody)
+    body: JSON.stringify(signupFormData)
   }
 
   const handleSignup = () => {
@@ -25,7 +37,7 @@ export default function Login() {
       .then(r => r.json())
       .then(res => {
         console.log('res is', res)
-        navigation.replace("Signup")
+        navigation.replace("Home")
       })
       // r.json().then(newUser => {
       //   console.log('user created successfully', newUser)
@@ -34,12 +46,7 @@ export default function Login() {
       .catch(e => console.error('ERROR is ', e))
   }
   const handleLogin = () => {
-    fetch(`http://localhost:3000/login`, postOptions)
-      .then(() => {
-        console.log('hit then block of login fetch')
-        navigation.replace("Home")
-      })
-      .catch(e => console.error('ERROR is ', e))
+    navigation.replace('Login')
   };
 
   return (
@@ -48,7 +55,7 @@ export default function Login() {
         style={styles.container}
         behavior="padding">
         <View >
-          <Text style={styles.title}>Login Page</Text>
+          <Text style={styles.title}>Signup Page</Text>
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -57,6 +64,12 @@ export default function Login() {
           <TextInput
             style={styles.input}
             placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
             secureTextEntry={true}
             onChangeText={(text) => setPassword(text)}
           />
