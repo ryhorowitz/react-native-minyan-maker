@@ -22,8 +22,9 @@ export default function Login() {
 
   const handleSignup = () => {
     fetch(`http://localhost:3000/signup`, postOptions)
-      .then(() => {
-        console.log('hit then block of signup fetch')
+      .then(r => r.json())
+      .then(res => {
+        console.log('res is', res)
         navigation.replace("Home")
       })
       .catch(e => console.error('ERROR is ', e))

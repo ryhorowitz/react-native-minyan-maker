@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :user_service, only: %i[create destroy]
 
   get '/auth', to: 'users#show'
+  post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post '/contact-shul', to: 'contact_shul#send_email'
