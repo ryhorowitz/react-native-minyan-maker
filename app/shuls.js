@@ -13,6 +13,7 @@ function Shuls() {
   const shulList = shuls.map(shul => {
     return <Card key={shul.id}>
       <Card.Title title={shul.name}></Card.Title>
+      <Card.Cover source={{ uri: shul.img }} />
     </Card>
   })
   // const shulList = shuls.map(shul => {
