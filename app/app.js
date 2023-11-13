@@ -2,38 +2,13 @@ import React, { useContext, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from './AppContext'
 import Login from './login'
-import Home from './home'
 import Signup from './signup'
-import Shuls from './shuls'
-
+import TabNav from './bottombar'
 const Stack = createNativeStackNavigator()
-const Tab = createMaterialBottomTabNavigator()
 
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      initialRouteName='Home'
-      activeColor="#e91e63"
-      barStyle={{ backgroundColor: 'tomato' }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen name="Shuls" component={Shuls} />
-    </Tab.Navigator>
-  )
-}
+
 function App() {
   const { user, setUser } = useContext(AppContext)
   // console.log('user', !user)
@@ -62,7 +37,7 @@ function App() {
     // <Stack.Navigator>
     //   <Stack.Screen name="Home" component={Home} />
     // </Stack.Navigator>
-    <MyTabs />
+    <TabNav />
   )
 }
 

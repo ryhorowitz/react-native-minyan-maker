@@ -1,37 +1,41 @@
-import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+import Icon from '@mdi/react';
+import { mdiSynagogueOutline } from '@mdi/js';
 
-const MusicRoute = () => <Text>Music</Text>;
+import Home from './home'
+import Shuls from './shuls'
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+const Tab = createMaterialBottomTabNavigator()
 
-const RecentsRoute = () => <Text>Recents</Text>;
-
-const NotificationsRoute = () => <Text>Notifications</Text>;
-
-const MyComponent = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline' },
-    { key: 'albums', title: 'Albums', focusedIcon: 'album' },
-    { key: 'recents', title: 'Recents', focusedIcon: 'history' },
-    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-    notifications: NotificationsRoute,
-  });
-
+function MyTabs() {
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
-  );
-};
+    <Tab.Navigator
+      initialRouteName='Home'
+      activeColor="#e91e63"
+      barStyle={{ backgroundColor: 'tomato' }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          )
+        }}
+      />
+      <Tab.Screen name="Shuls"
+        component={Shuls}
+        options={{
+          tabBarLabel: 'Shuls',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="star-david" color={color} size={26} />
+            // <Icon path={mdiSynagogueOutline} color={color} size={1} />
+          )
+        }} />
+    </Tab.Navigator>
+  )
+}
 
-export default MyComponent;
+export default MyTabs
