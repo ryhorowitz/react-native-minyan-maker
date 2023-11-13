@@ -1,7 +1,5 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import Icon from '@mdi/react';
-import { mdiSynagogueOutline } from '@mdi/js';
 
 import Home from './home'
 import Shuls from './shuls'
@@ -31,7 +29,6 @@ function MyTabs() {
           tabBarLabel: 'Shuls',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="star-david" color={color} size={26} />
-            // <Icon path={mdiSynagogueOutline} color={color} size={1} />
           )
         }} />
     </Tab.Navigator>

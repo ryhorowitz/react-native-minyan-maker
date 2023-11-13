@@ -34,9 +34,7 @@ function App() {
   }
 
   return (
-    // <Stack.Navigator>
-    //   <Stack.Screen name="Home" component={Home} />
-    // </Stack.Navigator>
+    // Logged in main component with 
     <TabNav />
   )
 }

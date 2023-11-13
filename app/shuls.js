@@ -1,14 +1,20 @@
 import { useContext } from "react"
 import { View, Text } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Card } from "react-native-paper";
 import AppContext from "./AppContext"
+import { ScrollView } from "react-native-gesture-handler";
 
 function Shuls() {
   const { shuls } = useContext(AppContext)
   const navigation = useNavigation()
 
   function handleNavigateToShul(id) { navigation(`/shuls/${id}`) }
-
+  const shulList = shuls.map(shul => {
+    return <Card key={shul.id}>
+      <Card.Title title={shul.name}></Card.Title>
+    </Card>
+  })
   // const shulList = shuls.map(shul => {
   //   return <div className="col" key={shul.id}>
   //     <div className="card w-50 mx-auto" key={shul.id}>
@@ -28,6 +34,9 @@ function Shuls() {
   return (
     <View>
       <Text>SHULS LIST WILL GO HERE</Text>
+      <ScrollView>
+        {shulList}
+      </ScrollView>
     </View>
   )
 }
