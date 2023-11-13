@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigation } from '@react-navigation/native';
-import AppContext from "../AppContext"
+import AppContext from "./AppContext"
 
 function Shuls() {
   const { shuls } = useContext(AppContext)

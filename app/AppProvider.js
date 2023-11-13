@@ -5,11 +5,11 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [shuls, setShuls] = useState([])
 
-  // useEffect(() => {
-  //   fetch(`/shuls`)
-  //     .then(r => r.json())
-  //     .then(shuls => setShuls(shuls))
-  // }, [user])
+  useEffect(() => {
+    fetch(`http://localhost:3000/shuls`)
+      .then(r => r.json())
+      .then(shuls => setShuls(shuls))
+  }, [user])
 
   function signout() {
     fetch('http://localhost:3000/signout', { method: 'DELETE' })
