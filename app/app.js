@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from './AppContext'
 import Login from './login'
 import Home from './home'
@@ -58,10 +59,10 @@ function App() {
   }
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-    // <MyTabs />
+    // <Stack.Navigator>
+    //   <Stack.Screen name="Home" component={Home} />
+    // </Stack.Navigator>
+    <MyTabs />
   )
 }
 
