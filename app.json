@@ -16,6 +16,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "minyan",
       "supportsTablet": true
     },
     "android": {

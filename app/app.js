@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as SecureStore from "expo-secure-store"
 import AppContext from './AppContext'
 import Login from './login'
 import Signup from './signup'
@@ -13,6 +14,9 @@ function App() {
   const { user, setUser } = useContext(AppContext)
   // console.log('user', !user)
 
+  const saveSecureValue = async () => {
+    await SecureStore.setItemAsync(key, value)
+  }
   useEffect(() => {
     fetch('/auth')
       .then(res => {
@@ -20,7 +24,7 @@ function App() {
           res.json().then(user => setUser(user))
         }
       })
-      .catch(e => console.error('/auth fetch error is', e))
+      .catch(e => console.log('/auth fetch error is', e))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

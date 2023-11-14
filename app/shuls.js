@@ -12,8 +12,11 @@ function Shuls() {
   function handleNavigateToShul(id) { navigation(`/shuls/${id}`) }
   const shulList = shuls.map(shul => {
     return <Card key={shul.id}>
-      <Card.Title title={shul.name}></Card.Title>
       <Card.Cover source={{ uri: shul.img }} />
+      <Card.Title title={shul.name}></Card.Title>
+      <Card.Content>
+        <Text variant="bodyMedium">{shul.street_address} {shul.city}, {shul.state} {shul.postal_code}</Text>
+      </Card.Content>
     </Card>
   })
   // const shulList = shuls.map(shul => {
