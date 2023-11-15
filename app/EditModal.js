@@ -47,10 +47,21 @@ function EditModal({ visible, setVisible }) {
             value={user.username}
             onChangeText={text => setUsername(text)}
           ></TextInput>
-          <Button style={styles.button}
-            title="Edit Profile" onPress={() => { }}>
-            <Text style={styles.username}>Edit Profile</Text>
-          </Button>
+          <View style={styles.buttonContainer}>
+
+            <Button style={styles.button}
+              title="Edit Profile"
+              mode="contained"
+              onPress={() => { }}>
+              <Text style={styles.buttonText}>Edit Profile</Text>
+            </Button>
+            <Button style={styles.button}
+              title="Cancel"
+              mode="contained"
+              onPress={() => { }}>
+              <Text style={styles.buttonText}>Cancel</Text>
+            </Button>
+          </View>
         </View>
       </Modal>
     </Portal>
@@ -73,5 +84,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 5
   },
+  buttonContainer: {
+    flex: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'flex-end',
+    marginBottom: 20
+  },
+  button: {
+    marginTop: 10,
+
+  },
+  buttonText: {
+    color: 'white'
+  }
 })
 export default EditModal
