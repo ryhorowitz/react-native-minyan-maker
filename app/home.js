@@ -1,13 +1,24 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react'
-import { View, Text, TextInput, Pressable, StyleSheet, KeyboardAvoidi, PressablengView } from 'react-native';
-import { Appbar, Avatar } from 'react-native-paper';
+import React, { useContext, useState } from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  KeyboardAvoidi,
+  PressablengView
+} from 'react-native';
+import { Appbar, Avatar, Modal, Portal } from 'react-native-paper';
 import AppContext from './AppContext';
 
 export default function Home() {
   const { user, setUser, signout } = useContext(AppContext)
-  const navigation = useNavigation()
+  const [visible, setVisible] = useState(false);
 
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const navigation = useNavigation()
   const handleSignOut = () => {
     signout()
   }
@@ -19,6 +30,17 @@ export default function Home() {
       {/* <Appbar.BackAction onPress={() => { }} /> */}
       <Appbar.Content title="Home" />
     </Appbar.Header>
+
+    <Portal>
+      <Modal visible={visible}
+        onDismiss={hideModal}
+        style={styles.modalContainer}
+        transparent={true}
+      >
+        <Text>Example Modal.  Click outside this area to dismiss.</Text>
+      </Modal>
+    </Portal>
+
     <View style={styles.container}>
       <Avatar.Text size={86} label={user.username.slice(0, 1).toUpperCase()} />
       <Text>{user.username}</Text>
@@ -28,7 +50,7 @@ export default function Home() {
       </View>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button}
-          title="Edit Profile" onPress={() => { }}>
+          title="Edit Profile" onPress={showModal}>
           <Text style={styles.username}>Edit Profile</Text>
         </Pressable>
         <Pressable style={styles.button}
@@ -45,6 +67,10 @@ const styles = StyleSheet.create({
   header: {
     // backgroundColor: 'tomato'
   },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 50
+  },
   container: {
     flex: 1,
     // justifyContent: 'center',
@@ -59,8 +85,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   username: {
-    alignSelf: 'center',
-    textAlign: 'center',
+    // alignSelf: 'center',
+    // textAlign: 'center',
     // paddingTop: 10,
     // justifyContent: 'flex-end',
   },
