@@ -7,7 +7,7 @@ import AppContext from './AppContext';
 
 // SplashScreen.show();
 export default function Login() {
-  const { setUser } = useContext(AppContext)
+  const { setUser, baseAPI } = useContext(AppContext)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginErrors, setLoginErrors] = useState([])
@@ -27,7 +27,7 @@ export default function Login() {
       },
       body: JSON.stringify(postBody)
     }
-    fetch(`http://localhost:3000/login`, postOptions)
+    fetch(`${baseAPI}/login`, postOptions)
       .then(r => {
         if (r.ok) {
           r.json().then(user => {

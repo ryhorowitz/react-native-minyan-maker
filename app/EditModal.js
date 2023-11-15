@@ -19,32 +19,74 @@ import {
 import AppContext from './AppContext'
 
 function EditModal({ visible, setVisible }) {
-  const { user, setUser, signout } = useContext(AppContext)
-  const [email, setEmail] = useState('')
-  const [username, setUsername] = useState('')
+  const { user, setUser, baseAPI } = useContext(AppContext)
+  const [email, setEmail] = useState(user.email)
+  const [username, setUsername] = useState(user.username)
   const hideModal = () => setVisible(false)
+
+  function handleUpdateProfile() {
+    const updateBody = { email, username }
+    const updateOptions = {
+
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updateBody)
+    }
+    fetch(`${baseAPI}/users/${user.id}`, updateOptions)
+      .then(r => {
+        if (r.ok) {
+          r.json()
+            .then(updatedProfile => {
+              console.log('updated profile', updatedProfile)
+              const { email, username } = updatedProfile
+              setUser({
+                ...user,
+                username,
+                email
+              })
+              hideModal()
+            })
+        } else {
+          r.json()
+            .then(e => {
+              console.log(Object.values(e).flat())
+              // setProfileUpdateErrors(Object.values(e).flat())
+            })
+            .then(() => {
+              // reset inputs to 
+              setEmail(user.email)
+              setUserName(user.username)
+            })
+        }
+      })
+  }
+
+
   return (
 
     <Portal>
-      <Modal visible={visible}
+      <Modal
+        // style={styles.modalContainer}
+        visible={visible}
         onDismiss={hideModal}
-        style={styles.modalContainer}
         animationType="slide"
         transparent={true}
       >
         <View style={styles.modalView}>
 
-          <Text variant='headlineMedium'>Edit Modal. more wordssdfssdfs</Text>
+          <Text variant='headlineMedium'>Edit Modal</Text>
           <TextInput
             style={styles.modalTextInput}
             label="Email"
-            value={user.email}
+            value={email}
             onChangeText={text => setEmail(text)}
           ></TextInput>
           <TextInput
             style={styles.modalTextInput}
             label="Username"
-            value={user.username}
+            value={username}
             onChangeText={text => setUsername(text)}
           ></TextInput>
           <View style={styles.buttonContainer}>
@@ -52,7 +94,7 @@ function EditModal({ visible, setVisible }) {
             <Button style={styles.button}
               title="Edit Profile"
               mode="contained"
-              onPress={() => { }}>
+              onPress={handleUpdateProfile}>
               <Text style={styles.buttonText}>Edit Profile</Text>
             </Button>
             <Button style={styles.button}
@@ -75,9 +117,9 @@ const styles = StyleSheet.create({
   },
   modalView: {
     backgroundColor: 'white',
-    padding: 15,
-    // width: '90%',
+    padding: 10,
     height: '90%',
+    // width: '80%',
     borderRadius: 10,
   },
   modalTextInput: {
@@ -92,7 +134,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-
   },
   buttonText: {
     color: 'white'

@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import AppContext from './AppContext';
+import React, { useState, useEffect } from 'react'
+import AppContext from './AppContext'
+import Constants from 'expo-constants'
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [shuls, setShuls] = useState([])
-
+  const [baseAPI] = useState(Constants.expoConfig.api)
+  // console.log('expo constants', Constants.expoConfig.api)
+  // const baseAPI = Constants.expoConfig.api
   useEffect(() => {
-    fetch(`http://localhost:3000/shuls`)
+    fetch(`${baseAPI}/shuls`)
       .then(r => r.json())
       .then(shuls => setShuls(shuls))
   }, [user])
 
   function signout() {
-    fetch('http://localhost:3000/signout', { method: 'DELETE' })
+    fetch(`${baseAPI}/signout`, { method: 'DELETE' })
       .then(r => {
         if (r.ok) {
           console.log('in the sighnout r.ok block')
@@ -31,7 +34,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider value={{
       user, setUser,
       shuls, setShuls,
-      signout
+      signout, baseAPI
     }}>
       {children}
     </AppContext.Provider>

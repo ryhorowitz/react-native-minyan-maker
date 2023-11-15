@@ -11,14 +11,14 @@ const Stack = createNativeStackNavigator()
 
 
 function App() {
-  const { user, setUser } = useContext(AppContext)
+  const { user, setUser, baseAPI } = useContext(AppContext)
   // console.log('user', !user)
 
   const saveSecureValue = async () => {
     await SecureStore.setItemAsync(key, value)
   }
   useEffect(() => {
-    fetch('/auth')
+    fetch(`${baseAPI}/auth`)
       .then(res => {
         if (res.ok) {
           res.json().then(user => setUser(user))

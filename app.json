@@ -6,6 +6,7 @@
     "scheme": "your-app-scheme",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "api": "http://localhost:3000",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "/Users/rywitz/Development/code/projects/react-native-minyan-maker/assets/splash.png",

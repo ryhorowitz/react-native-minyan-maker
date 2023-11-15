@@ -6,7 +6,7 @@ import AppContext from './AppContext';
 
 // SplashScreen.show();
 export default function Signup() {
-  const { setUser } = useContext(AppContext)
+  const { setUser, baseAPI } = useContext(AppContext)
   const [signupErrors, setSignupErrors] = useState([])
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -23,7 +23,7 @@ export default function Signup() {
       password_confirmation
     }
 
-    fetch(`http://localhost:3000/signup`, {
+    fetch(`${baseAPI}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
