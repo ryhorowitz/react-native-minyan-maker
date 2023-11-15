@@ -2,20 +2,27 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react'
 import {
   View,
-  Text,
-  TextInput,
   Pressable,
   StyleSheet,
   KeyboardAvoidi,
   PressablengView
 } from 'react-native';
-import { Appbar, Avatar, Modal, Portal } from 'react-native-paper';
+import {
+  Appbar,
+  Avatar,
+  Button,
+  Modal,
+  Portal,
+  Text,
+  TextInput,
+} from 'react-native-paper';
 import AppContext from './AppContext';
 
 export default function Home() {
   const { user, setUser, signout } = useContext(AppContext)
   const [visible, setVisible] = useState(false);
-
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const navigation = useNavigation()
@@ -35,9 +42,29 @@ export default function Home() {
       <Modal visible={visible}
         onDismiss={hideModal}
         style={styles.modalContainer}
+        animationType="slide"
         transparent={true}
       >
-        <Text>Example Modal.  Click outside this area to dismiss.</Text>
+        <View style={styles.modalView}>
+
+          <Text variant='headlineMedium'>Edit Modal. more wordssdfssdfs</Text>
+          <TextInput
+            style={styles.modalTextInput}
+            label="Email"
+            value={user.email}
+            onChangeText={text => setEmail(text)}
+          ></TextInput>
+          <TextInput
+            style={styles.modalTextInput}
+            label="Username"
+            value={user.username}
+            onChangeText={text => setUsername(text)}
+          ></TextInput>
+          <Button style={styles.button}
+            title="Edit Profile" onPress={showModal}>
+            <Text style={styles.username}>Edit Profile</Text>
+          </Button>
+        </View>
       </Modal>
     </Portal>
 
@@ -68,8 +95,20 @@ const styles = StyleSheet.create({
     // backgroundColor: 'tomato'
   },
   modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
     backgroundColor: 'white',
-    padding: 50
+    padding: 15,
+    // width: '90%',
+    height: '90%',
+    borderRadius: 10,
+  },
+  modalTextInput: {
+    marginTop: 10,
+    padding: 5
   },
   container: {
     flex: 1,
